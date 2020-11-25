@@ -72,13 +72,11 @@ export class IngredComp extends React.Component {
 
 //here declaring the StudentList class. And this StudentList class inherits the abstract class React.Component
 export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRecordState> {
-
-    //Declaring the constructor 
+   
     constructor() {
-
-        //here we are calling base class constructor using super()
+      
         super();        
-        //here we are intializing the interface's fields using default values.
+        //инициализация state
         this.state = {
             pizzaListData: [],
             loading: true,
@@ -90,7 +88,7 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
             select: true
             //toggleIng: true
         };
-        //this fetch method is responsible to get all the student record using web api.
+        //запрос на получение данных при помощи api
         fetch('api/Pizza/Index')
             .then(response => response.json() as Promise<PizzaListData[]>)
             .then(data => {
@@ -139,7 +137,6 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
             shMd: !data.shMd
         }))
         
-
         if (!this.state.shMd) {
             
             if (this.state.actP === '') {
@@ -162,21 +159,9 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
            
         }
         
-        
-        //console.log(this.state.pizzaListData[e.id-1].photo)
-        //console.log(this.state.pizzaListData.actP)
-        //this.id = e.id
-       
-        /*
-        if (!this.state.shMd) {
-            console.log('pusk')
-            this.setState({
-                actP: this.photo
-            })            
-        }*/
     }
 
-    //this method will render html onto the DOM.
+    //
     public render() {
        
         const show  = this.state.shMd;
@@ -186,7 +171,7 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
         
         let contents = this.state.loading
             ? <p><em>Loading...</em></p>
-            : this.renderStudentTable(this.state.pizzaListData);//this Table method will return the HTML table. This table will display all the record.
+            : this.renderStudentTable(this.state.pizzaListData);//условие отображения
         return <div>
             
             <h1>Пицца</h1>
@@ -258,7 +243,7 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
     }
     
 
-    //this method will return the html table to display all the student record with edit and delete methods.
+    //выведение записи из БД.
     private renderStudentTable(pizzaListData: PizzaListData[]) {
         return (
             <div className="pizza-block">
@@ -299,4 +284,3 @@ export class PizzaList extends React.Component<RouteComponentProps<{}>, PizzaRec
     }
 }
 
-//here we are declaring a class which have the same properties as we have in model class.
